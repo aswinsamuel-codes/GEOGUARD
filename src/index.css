@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.15) transparent;
+  }
+  *::-webkit-scrollbar { width: 6px; height: 6px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+  *::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+  *::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
+
+  body {
+    @apply bg-mine-950 text-gray-200;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-mine-800/50 backdrop-blur-md border border-white/[0.06] rounded-xl;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.03), 0 4px 24px rgba(0,0,0,0.4);
+  }
+  .glass-panel-dense {
+    @apply bg-mine-800/70 backdrop-blur-sm border border-white/[0.08] rounded-lg;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .glass-panel-hover {
+    @apply glass-panel transition-all duration-300;
+  }
+  .glass-panel-hover:hover {
+    @apply border-white/[0.12] bg-mine-800/60;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.5);
+  }
+  .status-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+  .status-dot-live {
+    @apply status-dot bg-risk-safe;
+    box-shadow: 0 0 8px rgba(34,197,94,0.6);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  .risk-badge {
+    @apply px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider;
+  }
+  .risk-safe { @apply bg-risk-safe/15 text-risk-safe border border-risk-safe/30; }
+  .risk-advisory { @apply bg-risk-advisory/15 text-risk-advisory border border-risk-advisory/30; }
+  .risk-high { @apply bg-risk-high/15 text-risk-high border border-risk-high/30; }
+  .risk-critical { @apply bg-risk-critical/15 text-risk-critical border border-risk-critical/30; }
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+           text-gray-400 hover:text-white hover:bg-white/[0.06] transition-all duration-200 cursor-pointer;
+  }
+  .nav-item-active {
+    @apply text-white bg-white/[0.08];
+    box-shadow: inset 3px 0 0 0 #06b6d4;
+  }
+  .kpi-card {
+    @apply glass-panel p-5 flex flex-col gap-2 relative overflow-hidden;
+  }
+  .section-title {
+    @apply text-sm font-semibold uppercase tracking-wider text-gray-400;
+  }
+  .chart-container {
+    @apply w-full;
+  }
+  .btn-primary {
+    @apply px-4 py-2 bg-accent-cyan/20 text-accent-cyan border border-accent-cyan/30 
+           rounded-lg text-sm font-medium hover:bg-accent-cyan/30 transition-all duration-200;
+  }
+  .btn-danger {
+    @apply px-4 py-2 bg-risk-critical/20 text-risk-critical border border-risk-critical/30
+           rounded-lg text-sm font-medium hover:bg-risk-critical/30 transition-all duration-200;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(34,197,94,0.6); }
+  50% { box-shadow: 0 0 16px rgba(34,197,94,0.3); }
+}
+
+.leaflet-container {
+  background: #0d1321 !important;
+  border-radius: 0.75rem;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(26,34,53,0.95) !important;
+  color: #e5e7eb !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 0.75rem !important;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+}
+.leaflet-popup-tip {
+  background: rgba(26,34,53,0.95) !important;
+}
+.leaflet-popup-close-button {
+  color: #9ca3af !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(255,255,255,0.05) !important;
+}
+.recharts-text {
+  fill: #9ca3af !important;
+  font-size: 11px !important;
+}
